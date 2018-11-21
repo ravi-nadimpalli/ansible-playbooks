@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    package_name: apache2
+
+  - name: "installing apache"
+    package:
+      name: "{{ package_name }}"
+      state: present
+  - name: "starting apache"
+    service:
+      name: "{{package_name}}"
+      state: started
+    when: ansible_os_family=="RedHat"
+    
